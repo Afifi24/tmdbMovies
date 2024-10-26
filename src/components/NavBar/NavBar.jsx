@@ -34,7 +34,7 @@ const NavBar = () => {
               color="inherit"
               edge="start"
               style={{ outline: "none" }}
-              onClick={() => {}}
+              onClick={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)}
               className={classes.menuButton}
             >
               <Menu />
@@ -52,7 +52,7 @@ const NavBar = () => {
             ) : (
               <Button
                 color="inherit"
-                // component={Link}
+                component={Link}
                 to={`/profile/:id`}
                 className={classes.linkButton}
                 onClick={() => {}}
@@ -76,14 +76,22 @@ const NavBar = () => {
               variant="temporary"
               anchor="right"
               open={mobileOpen}
-              className={classes.drawerBackground}
               classes={{ paper: classes.drawerPaper }}
               ModalProps={{ keepMounted: true }}
+              onClose={() =>
+                setMobileOpen((preveMobileOpen) => !preveMobileOpen)
+              }
             >
               <Sidebar setMobileOpen={setMobileOpen} />
             </Drawer>
           ) : (
-            <Drawer>{/* <Sidebar setMobileOpen={setMobileOpen} /> */}</Drawer>
+            <Drawer
+              classes={{ paper: classes.drawerPaper }}
+              variant="permanent"
+              open
+            >
+              <Sidebar setMobileOpen={setMobileOpen} />
+            </Drawer>
           )}
         </nav>
       </div>
