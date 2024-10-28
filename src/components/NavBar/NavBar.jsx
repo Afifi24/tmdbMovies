@@ -15,14 +15,14 @@ import {
   Brightness7,
 } from "@mui/icons-material";
 import useStyles from "./styles";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useTheme } from "@mui/material/styles";
 import { Sidebar } from "../index";
 const NavBar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const classes = useStyles();
-  const isMobile = useMediaQuery("(max-width:600px)");
+  const isMobile = useMediaQuery("(max-width:735px)");
   const theme = useTheme();
   const isAuthenticated = true;
   return (
@@ -69,6 +69,7 @@ const NavBar = () => {
           {isMobile && "Search..."}
         </Toolbar>
       </AppBar>
+
       <div>
         <nav className={classes.drawer}>
           {isMobile ? (
@@ -95,7 +96,6 @@ const NavBar = () => {
           )}
         </nav>
       </div>
-      <Outlet />
     </>
   );
 };

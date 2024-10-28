@@ -9,7 +9,7 @@ import {
   Box,
   CircularProgress,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import useStyles from "./styles";
 
@@ -36,7 +36,7 @@ const Sidebar = ({ setMobileOpen }) => {
   const classes = useStyles();
 
   return (
-    <>
+    <div>
       <Link to="/" className={classes.imageLink}>
         <img
           className={classes.image}
@@ -83,7 +83,7 @@ const Sidebar = ({ setMobileOpen }) => {
           </Link>
         ))}
       </List>
-    </>
+    </div>
   );
 };
 

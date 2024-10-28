@@ -1,6 +1,11 @@
 import React from "react";
 import { CssBaseline } from "@mui/material";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Route,
+  RouterProvider,
+  Routes,
+} from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import useStyles from "./styles";
 // import components
@@ -11,10 +16,12 @@ import {
   NavBar,
   Profile,
 } from "./components";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <NavBar />,
+
     children: [
       {
         path: "/",
@@ -41,9 +48,16 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <NavBar />
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <RouterProvider router={router} />
+        <Routes>
+          <Route path="/" element={<Movies />} />
+          <Route path="/movie/:id" element={<MovieInformation />} />
+          <Route path="/actors/:id" element={<Actors />} />
+          <Route path="/profile/:id" element={<Profile />} />
+        </Routes>
+        {/* <RouterProvider router={router} /> */}
       </main>
       {/* <div ref={alanBtnContainer} /> */}
     </ThemeProvider>

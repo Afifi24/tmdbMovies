@@ -2,14 +2,7 @@ import React from "react";
 
 const Actors = () => {
   return (
-    <div
-      style={{
-        paddingLeft: "14rem",
-        background: "red",
-        position: "relative",
-        // left: "12rem",
-      }}
-    >
+    <div>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, enim
       mollitia corporis voluptas ab quidem nostrum sint provident. Voluptatibus
       repudiandae totam aperiam corrupti voluptate veritatis expedita enim,
