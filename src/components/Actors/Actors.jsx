@@ -2,13 +2,19 @@ import React, { useState } from "react";
 import { Box, Grid, Button, CircularProgress, Typography } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetActorsDetailsQuery } from "../../services/TMDB";
+import {
+  useGetActorsDetailsQuery,
+  useGetMoviesByActorIdQuery,
+} from "../../services/TMDB";
 import useStyles from "./styles";
+import { MovieList, Pagination } from "..";
 const Actors = () => {
   const { id } = useParams();
   const { data, isFetching, error } = useGetActorsDetailsQuery(id);
-  const history = useNavigate();
+  const navigate = useNavigate(); // Renamed 'history' to 'navigate'
   const classes = useStyles();
+  const [page, setPage] = useState(1);
+  const { data: movies } = useGetMoviesByActorIdQuery({ id, page });
 
   if (isFetching) {
     return (
@@ -22,6 +28,7 @@ const Actors = () => {
       </Box>
     );
   }
+
   if (error) {
     return (
       <Box
@@ -32,7 +39,7 @@ const Actors = () => {
       >
         <Button
           startIcon={<ArrowBack />}
-          onClick={() => history(-1)}
+          onClick={() => navigate(-1)} // Updated to use 'navigate'
           color="primary"
         >
           Go back
@@ -40,6 +47,7 @@ const Actors = () => {
       </Box>
     );
   }
+
   return (
     <>
       <Grid container spacing={3}>
@@ -47,7 +55,7 @@ const Actors = () => {
           <img
             className={classes.image}
             src={`https://image.tmdb.org/t/p/w780/${data?.profile_path}`}
-            alt={data.name}
+            alt={data?.name}
           />
         </Grid>
         <Grid
@@ -80,7 +88,7 @@ const Actors = () => {
             </Button>
             <Button
               startIcon={<ArrowBack />}
-              onClick={() => history(-1)}
+              onClick={() => navigate(-1)} // Updated to use 'navigate'
               color="primary"
             >
               Back
@@ -88,6 +96,17 @@ const Actors = () => {
           </Box>
         </Grid>
       </Grid>
+      <Box margin="2rem 0">
+        <Typography variant="h2" gutterBottom align="center">
+          Movies
+        </Typography>
+        {movies && <MovieList movies={movies} numberOfMovies={12} />}
+        <Pagination
+          currentPage={page}
+          setPage={setPage}
+          totalPages={movies?.total_pages}
+        />
+      </Box>
     </>
   );
 };
