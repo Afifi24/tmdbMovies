@@ -13,7 +13,7 @@ export default makeStyles((theme) => ({
     padding: "2em",
     paddingLeft: "16em",
     "@media (max-width:735px)": {
-      paddingLeft: 0,
+      paddingLeft: "2em",
     },
   },
 }));
