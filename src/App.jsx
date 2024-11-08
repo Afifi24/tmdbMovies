@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import useStyles from "./styles";
+import ToggleColorMode from "./utils/ToggleColorMode.jsx";
+
 // import components
 import {
   Actors,
@@ -46,7 +48,7 @@ const App = () => {
   const classes = useStyles();
   const theme = createTheme();
   return (
-    <ThemeProvider theme={theme}>
+    <ToggleColorMode>
       <CssBaseline />
       <NavBar />
       <main className={classes.content}>
@@ -61,7 +63,7 @@ const App = () => {
         {/* <RouterProvider router={router} /> */}
       </main>
       {/* <div ref={alanBtnContainer} /> */}
-    </ThemeProvider>
+    </ToggleColorMode>
   );
 };
 
